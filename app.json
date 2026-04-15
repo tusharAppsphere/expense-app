@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Expense Manager",
+    "slug": "expense-manager",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#4B5EFC"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.expensemanager.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#4B5EFC"
+      },
+      "package": "com.expensemanager.app"
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-secure-store"
+    ],
+    "scheme": "expensemanager"
+  }
+}
