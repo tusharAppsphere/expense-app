@@ -1,0 +1,45 @@
+# Python / Django
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.manifest
+*.spec
+*.log
+*.pot
+*.pyc
+
+# Virtual env
+venv/
+.env
+.env.*
+
+# Django
+db.sqlite3
+staticfiles/
+media/
+*.sqlite3
+
+# Node / Expo
+node_modules/
+dist/
+.expo/
+.expo-shared/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db

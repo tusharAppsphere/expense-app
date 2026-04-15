@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: expense-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python manage.py migrate --no-input && python manage.py collectstatic --no-input
+    startCommand: gunicorn expense_backend.wsgi --log-file -
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: PYTHON_VERSION
+        value: "3.10.0"
