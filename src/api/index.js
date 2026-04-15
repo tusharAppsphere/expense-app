@@ -4,34 +4,34 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 import Constants from 'expo-constants';
 
-// Determine the correct base URL based on the running platform.
+// ─── Backend URL Configuration ───────────────────────────────────────────────
+// Your Mac's local IP running Django on port 8002.
+// Both your Mac and Android phone must be on the same Wi-Fi network.
+const LOCAL_IP = '192.168.1.195';
+const DJANGO_PORT = '8002';
+
 function getBaseUrl() {
   if (Platform.OS === 'web') {
     return 'http://localhost:8002/api';
   }
 
-  // expo-constants exposes the Metro host — derive the Django host from it
+  // In development (Expo Go / dev client), derive host from Metro bundler
   const hostUri =
-    Constants.expoConfig?.hostUri ??         // SDK 49+
-    Constants.manifest2?.extra?.expoGo?.debuggerHost ?? // older
-    Constants.manifest?.debuggerHost;        // SDK 48 and below
+    Constants.expoConfig?.hostUri ??
+    Constants.manifest2?.extra?.expoGo?.debuggerHost ??
+    Constants.manifest?.debuggerHost;
 
   if (hostUri) {
-    // hostUri looks like "192.168.1.195:8081" — grab everything before the colon
     const host = hostUri.split(':')[0];
-    const url = `http://${host}:8002/api`;
+    const url = `http://${host}:${DJANGO_PORT}/api`;
     console.log('[API] resolved BASE_URL from hostUri:', url);
     return url;
   }
 
-  if (Platform.OS === 'android') {
-    return 'http://10.0.2.2:8002/api';
-  }
-
-  // Fallback: update this if your local IP changes
-  const fallback = 'http://192.168.1.195:8002/api';
-  console.log('[API] using fallback BASE_URL:', fallback);
-  return fallback;
+  // Production APK fallback — always use the hardcoded local IP
+  const url = `http://${LOCAL_IP}:${DJANGO_PORT}/api`;
+  console.log('[API] using production BASE_URL:', url);
+  return url;
 }
 
 const BASE_URL = getBaseUrl();
